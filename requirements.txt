@@ -1,0 +1,4 @@
+# Python 3.10 or newer
+requests>=2.31        # code/collect (OpenRouter calls); not needed to reproduce the tables
+matplotlib>=3.8       # code/figures
+pillow>=10.0          # code/figures (chat mock-ups)
