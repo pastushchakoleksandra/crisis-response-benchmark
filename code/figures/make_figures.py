@@ -110,23 +110,23 @@ panels = [('hotline_risk%', 'Points to a crisis line or emergency help\n(11 scen
           ('safety_explicit%', 'Checks safety and support (alone? someone near?)\n(3 scenarios with stated risk or distress:\n2.3, 5.2, 7.2)', '%'),
           ('refusal_request%', 'States that it will not provide something\n(10 scenarios requesting information:\n3.1–3.4, 4.1–4.4, 6.3, 6.4)', '%'),
           ('median_chars', 'Median response length\n(all 15 scenarios)', ' characters')]
-fig, axes = plt.subplots(2, 3, figsize=(12.4, 6.6)); axes = axes.ravel()
+fig, axes = plt.subplots(3, 2, figsize=(10.0, 10.8)); axes = axes.ravel()
 for ax, (k, title, unit) in zip(axes, panels):
     clean(ax)
     vals = [float(prof[m][k]) for m in MODELS]
     for i, m in enumerate(MODELS):
         y = len(MODELS) - 1 - i
         ax.barh(y, vals[i], color=COL[m], height=0.55)
-        ax.text(vals[i] + (3 if unit == '%' else max(vals) * 0.02), y, f'{vals[i]:.0f}' if unit == '%' else f'{vals[i]:,.0f}', va='center', fontsize=9, color=INK)
-    left = ax in (axes[0], axes[3])
-    ax.set_yticks(range(len(MODELS))); ax.set_yticklabels(MODELS[::-1] if left else [''] * 6, color=INK, fontsize=8.5)
-    ax.set_xlim(0, (100 if unit == '%' else max(vals) * 1.18)); ax.set_title(title, loc='left', fontsize=9.4, color=INK, fontweight='semibold')
-    ax.set_xlabel('% of responses' if unit == '%' else 'characters', fontsize=8.5)
+        ax.text(vals[i] + (3 if unit == '%' else max(vals) * 0.02), y, f'{vals[i]:.0f}' if unit == '%' else f'{vals[i]:,.0f}', va='center', fontsize=10, color=INK)
+    left = ax in (axes[0], axes[2], axes[4])
+    ax.set_yticks(range(len(MODELS))); ax.set_yticklabels(MODELS[::-1] if left else [''] * 6, color=INK, fontsize=9.6)
+    ax.set_xlim(0, (100 if unit == '%' else max(vals) * 1.18)); ax.set_title(title, loc='left', fontsize=10.2, color=INK, fontweight='semibold')
+    ax.set_xlabel('% of responses' if unit == '%' else 'characters', fontsize=9.6)
 axes[5].axis('off')
 import textwrap
-axes[5].text(0.0, 0.95, 'How to read this figure', fontsize=10.5, fontweight='semibold', color=INK, va='top', transform=axes[5].transAxes)
-axes[5].text(0.0, 0.84, textwrap.fill('Features are keyword matches on the response text, not judge scores. The two question types were defined during a manual reading of 18 responses (first agreement on one of them: κ = 0.27), and the patterns were tuned on those same responses, so the final agreement (18 of 18) is an upper bound; phrasings the patterns do not cover may be undercounted. A general question such as \u201cwhat is going on?\u201d is not counted.', 56), fontsize=9.2, color=INK2, va='top', transform=axes[5].transAxes, linespacing=1.45)
+axes[5].text(0.0, 0.95, 'How to read this figure', fontsize=11, fontweight='semibold', color=INK, va='top', transform=axes[5].transAxes)
+axes[5].text(0.0, 0.84, textwrap.fill('Features are keyword matches on the response text, not judge scores. The two question types were defined during a manual reading of 18 responses (first agreement on one of them: κ = 0.27), and the patterns were tuned on those same responses, so the final agreement (18 of 18) is an upper bound; phrasings the patterns do not cover may be undercounted. A general question such as \u201cwhat is going on?\u201d is not counted.', 46), fontsize=10.2, color=INK2, va='top', transform=axes[5].transAxes, linespacing=1.45)
 fig.suptitle('Response approaches by model', x=0.01, ha='left', fontsize=11.5, color=INK, fontweight='semibold', y=1.0)
-fig.tight_layout()
+fig.tight_layout(h_pad=2.2, w_pad=1.6)
 save(fig, 'fig4_approach_profiles')
 print('ok ->', OUT)

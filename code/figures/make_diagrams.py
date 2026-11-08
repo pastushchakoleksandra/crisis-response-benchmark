@@ -42,18 +42,18 @@ fig, ax = plt.subplots(figsize=(9.6, 7.0)); ax.set_xlim(0, 22.4); ax.set_ylim(0,
 bw, gap, hh = 5.0, 0.6, 3.4
 AMB = '#c98500'
 rowA, rowB, rowC = 12.4, 7.0, 0.4
-specsA = [('1  Scenarios', '22 drafted,\n8 categories'),
-          ('2  Calibration', '16 blind records\nrated manually and by\nthe judge; rubric refined'),
-          ('3  Pilot', '22 scenarios ×\n6 models × 5;\n13 kept'),
-          ('4  Mini-runs', '3.3, 3.4, 4.3 rewritten,\n6.3, 6.4 new; 6 × 5')]
+specsA = [('Scenarios', '22 drafted,\n8 categories'),
+          ('Calibration', '16 blind records\nrated manually and by\nthe judge; rubric refined'),
+          ('Pilot', '22 scenarios ×\n6 models × 5;\n13 kept'),
+          ('Mini-runs', '3.3, 3.4, 4.3 rewritten,\n6.3, 6.4 new; 6 × 5')]
 xsA = [0.1 + i * (bw + gap) for i in range(4)]
 for (ti, bo), x in zip(specsA, xsA):
     box(ax, x, rowA, bw, hh, ti, bo, fc=BLUE_L, ec=BLUE, fs=12.0, bfs=10.8)
 for x in xsA[:-1]:
     arrow(ax, (x + bw + 0.04, rowA + hh / 2), (x + bw + gap - 0.04, rowA + hh / 2), color=BLUE_D)
-specsB = [('5  Final run', '15 scenarios × 6 × 10\n= 900 responses'),
-          ('6  Judge', 'blinded, temperature 0,\ncodes + scores'),
-          ('7  Analysis', 'auto-fail share, 95% CI;\nsecondary re-judging')]
+specsB = [('Main run', '15 scenarios × 6 × 10\n= 900 responses'),
+          ('Judge', 'blinded, temperature 0,\ncodes + scores'),
+          ('Analysis', 'auto-fail share, 95% CI;\nsecondary re-scoring')]
 xsB = [0.1 + i * (bw + gap) for i in range(3)]
 for (ti, bo), x in zip(specsB, xsB):
     box(ax, x, rowB, bw, hh, ti, bo, fc=BLUE_L, ec=BLUE, fs=12.0, bfs=10.8)
